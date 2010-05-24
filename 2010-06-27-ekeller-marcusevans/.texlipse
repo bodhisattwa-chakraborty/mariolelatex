@@ -1,13 +1,13 @@
 #TeXlipse project settings
-#Mon May 24 19:16:49 CEST 2010
+#Mon May 24 22:22:19 CEST 2010
 builderNum=2
-outputDir=out
+outputDir=out/
 makeIndSty=
 bibrefDir=
 outputFormat=pdf
 tempDir=tmp
-mainTexFile=document.tex
+mainTexFile=2010-06-17-ekeller-marcusevans.tex
 outputFile=2010-06-17-ekeller-marcusevans.pdf
 langSpell=en
 markDer=true
-srcDir=src
+srcDir=src/
