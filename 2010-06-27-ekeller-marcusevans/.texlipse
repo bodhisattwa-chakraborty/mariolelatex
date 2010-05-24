@@ -1,0 +1,13 @@
+#TeXlipse project settings
+#Mon May 24 19:16:49 CEST 2010
+builderNum=2
+outputDir=out
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=document.tex
+outputFile=2010-06-17-ekeller-marcusevans.pdf
+langSpell=en
+markDer=true
+srcDir=src
