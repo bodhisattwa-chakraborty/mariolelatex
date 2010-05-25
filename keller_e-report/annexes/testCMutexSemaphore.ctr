@@ -1,0 +1,189 @@
+Log Level defaulted to detailed.
+===========================================================================
+= Wind River Workbench Unit Tester v2.5                                   =
+=-------------------------------------------------------------------------=
+= Test Description: CMutexSemaphore                                       =
+=     Test Started: Time not available                                    =
+===========================================================================
+------------------------- Start Test: test_CMutexSemaphore_createMutex
+
+create a mutex with a valid name
+
+    Start Call Sequence Validation:
+    Expected calls: semOpen#default
+
+                Start Exception Block:
+
+        PASSED: Function: semOpen
+        PASSED: Instance: default
+        Call sequence matched so far:
+        semOpen#default
+        PASSED: Check: returnValue = expected_returnValue
+                value: 0
+        PASSED: Check: aName = testObj->mName
+                value: "TestMutex"
+
+                PASSED: No Exceptions
+
+                End Exception Block
+
+    End Call Sequence Validation:
+
+    Call sequence matched:
+    semOpen#default
+
+------------------------- End Test: test_CMutexSemaphore_createMutex
+
+------------------------- Start Test: test_CMutexSemaphore_createMutex2
+
+create a mutex with a 'null' name
+
+    Start Call Sequence Validation:
+    Expected calls: semOpen#default
+
+                Start Exception Block:
+
+        PASSED: Function: semOpen
+        PASSED: Instance: default
+        Call sequence matched so far:
+        semOpen#default
+        PASSED: Check: returnValue = expected_returnValue
+                value: -1
+        PASSED: Check: aName = testObj->mName
+                value: ""
+
+                PASSED: No Exceptions
+
+                End Exception Block
+
+    End Call Sequence Validation:
+
+    Call sequence matched:
+    semOpen#default
+
+------------------------- End Test: test_CMutexSemaphore_createMutex2
+
+------------------------- Start Test: test_CMutexSemaphore_createBinary
+
+create a binary semaphore with a valid name
+
+    Start Call Sequence Validation:
+    Expected calls: semOpen#default
+
+                Start Exception Block:
+
+        PASSED: Function: semOpen
+        PASSED: Instance: default
+        Call sequence matched so far:
+        semOpen#default
+        PASSED: Check: returnValue = expected_returnValue
+                value: 0
+        PASSED: Check: aName = testObj->mName
+                value: "TestBinary"
+
+                PASSED: No Exceptions
+
+                End Exception Block
+
+    End Call Sequence Validation:
+
+    Call sequence matched:
+    semOpen#default
+
+------------------------- End Test: test_CMutexSemaphore_createBinary
+
+[...]
+
+CMutexSemaphore.cpp(83):CMutexSemaphore::createMutex(const RhpString &)
+statement coverage details (with executed and un-executed cases)
+
+utexSemaphore.cpp(85):      stmnt   1 (other)                               8
+utexSemaphore.cpp(87):      stmnt   2 (declaration)                         8
+utexSemaphore.cpp(88):      stmnt   3 (declaration)                         8
+utexSemaphore.cpp(89):      stmnt   4 (other)                               8
+utexSemaphore.cpp(97):      stmnt   5 (cond)                                8
+utexSemaphore.cpp(99):      stmnt   6 (other)                               1
+texSemaphore.cpp(100):      stmnt   7 (return)                              1
+texSemaphore.cpp(103):      stmnt   8 (return)                              7
+
+"CMutexSemaphore::createMutex"                           executed           8
+"CMutexSemaphore::createMutex"                        un-executed           0
+"CMutexSemaphore::createMutex"                 statement coverage      100.0%
+
+CMutexSemaphore.cpp(107):CMutexSemaphore::init()
+statement coverage details (with executed and un-executed cases)
+
+texSemaphore.cpp(109):      stmnt   1 (return)                              6
+
+"CMutexSemaphore::init"                                  executed           1
+"CMutexSemaphore::init"                               un-executed           0
+"CMutexSemaphore::init"                        statement coverage      100.0%
+
+CMutexSemaphore.h(104):CMutexSemaphore::lock()
+statement coverage details (with executed and un-executed cases)
+
+MutexSemaphore.h(107):      stmnt   1 (declaration)                         6
+MutexSemaphore.h(108):      stmnt   2 (cond)                                4
+MutexSemaphore.h(110):      stmnt   3 (other)                               1
+
+"CMutexSemaphore::lock"                                  executed           3
+"CMutexSemaphore::lock"                               un-executed           0
+"CMutexSemaphore::lock"                        statement coverage      100.0%
+
+CMutexSemaphore.h(116):CMutexSemaphore::unlock()
+statement coverage details (with executed and un-executed cases)
+
+MutexSemaphore.h(118):      stmnt   1 (declaration)                         2
+MutexSemaphore.h(119):      stmnt   2 (cond)                                2
+MutexSemaphore.h(121):      stmnt   3 (other)                               1
+
+"CMutexSemaphore::unlock"                                executed           3
+"CMutexSemaphore::unlock"                             un-executed           0
+"CMutexSemaphore::unlock"                      statement coverage      100.0%
+
+CMutexSemaphore.cpp(28):CMutexSemaphore::~CMutexSemaphore()
+statement coverage details (with executed and un-executed cases)
+
+utexSemaphore.cpp(30):      stmnt   1 (other)                               3
+
+"texSemaphore::~CMutexSemaphore"                         executed           1
+"texSemaphore::~CMutexSemaphore"                      un-executed           0
+"texSemaphore::~CMutexSemaphore"               statement coverage      100.0%
+
+Summary by     EXECUTED     Overall                Statistics
+Coverage type  INFEASIBLES  (wavg)     avg /    min /    max /    dev /   num
+-----------------------------------------------------------------------------
+entry point            0   100.0%   100.0% / 100.0% / 100.0% /   0.0% /     9
+call-return            0   100.0%   100.0% / 100.0% / 100.0% /   0.0% /     9
+statement              0   100.0%   100.0% / 100.0% / 100.0% /   0.0% /     9
+-----------------------------------------------------------------------------
+
+EXPORT_COVERAGE: coverage data written to "/tgtsvr/test_BD_CMS_managed/test_CMu
+texSemaphore.cov"
+===========================================================================
+= Test Finished: Time not available                                       =
+=-------------------------------------------------------------------------=
+= Test                 Script  Checks  Checks  Checks  Call Seq     TEST  =
+= Case                 Errors  Failed  Passed  Warned  Failures    RESULT =
+=-------------------------------------------------------------------------=
+= test_CMutexSemapho        0       0       3       0         0      PASS =
+= test_CMutexSemapho        0       0       3       0         0      PASS =
+= test_CMutexSemapho        0       0       3       0         0      PASS =
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= test_CMutexSemapho        0       0       3       0         0      PASS =
+= test_CMutexSemapho        0       0       4       0         0      PASS =
+= test_CMutexSemapho        0       0       4       0         0      PASS =
+= test_CMutexSemapho        0       0       2       0         0      PASS =
+= test_CMutexSemapho        0       0       2       0         0      PASS =
+= TEST_CLASS(CMutexS        0       0       3       0         0      PASS =
+= test_CMutexSemapho        0       0       2       0         0      PASS =
+= TEST_CLASS(CMutexS        0       0       1       0         0      PASS =
+= TEST_CLASS(CMutexS        1       0       2       0         0   >> FAIL =
+= TEST_CLASS(CMutexS        0       1       1       0         0   >> FAIL =
+= TEST_CLASS(CMutexS        0       0       1       0         0      PASS =
+= TEST_CLASS(CMutexS        0       0       1       0         0      PASS =
+= Other                     0       0       3       0         0      PASS =
+=-------------------------------------------------------------------------=
+= TOTALS                    1       1      40       0         0   >> FAIL =
+===========================================================================

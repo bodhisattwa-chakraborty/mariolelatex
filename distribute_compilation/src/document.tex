@@ -1,0 +1,324 @@
+%% This Article is aimed to install distcc on a large number of 
+%%Hamilton-Medical PC to decrease the overall compilation time for the
+%% platform C Projects
+%%
+%% AUTHORS:
+%%	* ekeller
+%%
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage{cite}
+\title{Distribute Compilation for Hamilton-Medical platform C}
+\author{Eric Keller - ekeller@hamilton-medical.ch}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Problematic}
+
+Hamilton-Medical platform C Development team uses IBM Telelogic Rhapsody tool, to generate C++ code for the WindRiver VxWorks Operating system for the PPC32 architecture.
+
+There are 2 project using this development environment: 
+\begin{itemize}
+  \item C2 PLUS (Nemo)
+  \item C1 (Frodo)
+\end{itemize}
+
+The C2 PLUS project with the version 1.1.1 generated approximately 3600 sources
+files (*.cpp, *.h) and 1/2 Million of line of executable code~\cite{Locmetrics}. 
+To obtaining the final product (full software build for C2 PLUS), the
+compilation time requires more than one and a half hour. During this time, the
+developer cannot apply any changes to the Models, risking to break the actual compilation. Knowing that the tendency is to develop on several products at the same time, the compilation time will be an issue.
+
+\emph{Distcc} is a free software under GNU General Public License v2
+Distcc is a program to distribute builds of C, C++ code across several machines on a network.
+distcc should always generate the same results as a local build, is simple to install and use, 
+and is usually much faster than a local compile ~\cite{distcc-samba}.
+
+This paper will detail the benefits using distcc, explain how it works,
+what tools are required, finally how could it be extended on a compilation farm
+among the Hamilton-Medical PC resource.
+
+\section{Objectives}
+
+The main objective of spreading Distcc on a large number of Hamilton-Medical PC,
+is to reduce the time of compilation for the platform C Projects.
+On a test basis of 4 volunteer PC among the Hamilton-Medical R\&D computers, we
+were able to reduce the build of the C2 Plus software to less than 30 minutes.
+
+Nevertheless this timing was obtained with only one developer was performing a
+full build using distcc. Meaning the time would be more than 30 min if several
+developer are using distcc at the same time, the solution is to increase the
+number of volunteer PC.
+
+\subsection{Decrease Compilation time}
+
+In the coming months, developer of the C platform will increase the number of
+daily builds, especially if working on several instruments version (C1, C2) in parallel.
+During the compilation the developer is not able to change anything to his
+local models. 
+Waiting one hour for a full build to be done, or noticing that one
+modification was not compatible with the whole software, and rebuild again the
+whole project, cost some time (cumulate on a whole team, it becomes
+significant).
+
+Not only doing full builds (make clean all) is time consuming, each time we
+build the current model we are working on, takes time. Dividing this time by 2
+is an considerable advantage and time winning process.
+
+\subsection{Use idle CPU time}
+
+The main activity of our computer CPU is being into the idle process which is
+a resources waste in a way! The idea behind using distcc on volunteer PC, is to
+perform compilation operation to reduce this CPU idle time.
+
+Using volunteer PC does not mean to overload the processor so that the user work
+would be impossible. The distcc server on the volunteer host gets a priority
+below normal (nice=6), meaning the end user will not notice anything, when there are
+some compilation running as a background task.
+
+\subsection{Compilation farm}
+
+There are 3 applications to a compilation farm:~\cite{wikipedia}
+\begin{itemize}
+	\item Cross-platform development, When writing software that runs on multiple processor architectures and operating systems
+	\item Cross-platform continuous integration testing, under this scenario, each
+	server has a different processor architecture or runs a different operating system; scripts automatically build the latest version of a source tree from a version control repository. 
+	\item Distributed compilation, Building software packages typically requires
+	operations that can be run in parallel (for example, compiling individual source code files). By using a compile farm, these operations can be run in parallel on separate machines. 
+\end{itemize}
+
+In our case, the 3rd application is interesting us particularly. Running a
+compilation on several machines will reduce the overall time of compilation in
+a large project.
+
+The second point could also be integrated to our work flow at later stage, for
+continuously testing (units) of our project.
+
+In our case the compilation farm would be composed of volunteer PC, among the
+Hamilton-Medical park as a first step, eventually all the Hamilton PC in a later
+state.
+
+\section{Improvments}
+Using Distcc is one thing, about distributing compilation across volunteer PC
+from a local network, but there are several improvements which help to reduce
+compilation time even more. Other application working with distcc optimism the
+compilation distribution to the volunteer PC, always looking to give task to the
+faster available (with the less load) computer.
+
+\subsection{pump mode}
+%% pump preprocessor distribution
+In "pump" mode, distcc sends source file with their included header files to
+the compilation servers, which now carry out both pre-processing and
+compilation. As a result, distcc-pump can distribute files up to 10 times
+faster to compilation servers than distcc~\cite{distcc-gg}.
+
+\subsection{ccache}
+%% cache the compilation files
+ccache is a compiler cache. It acts as a caching pre-processor to C/C++
+compilers, using the -E compiler switch and a hash to detect when a compilation
+can be satisfied from cache. This often results in a 5 to 10 times speedup in
+common compilations~\cite{ccache}.
+
+\subsection{dmucs}
+%% optimised distribution to volonteer pc
+Dmucs is a system that allows a group of users to share a compilation farm. 
+Each compilation request from each user will be sent to the fastest available
+machine, every time.  The system has these fine qualities~\cite{dmucs}:  
+
+\begin{itemize}
+	\item Supports multiple users compiling simultaneously, and scales well to handle the new loads.
+	\item Supports multiple operating systems in the compilation farm.
+	\item Uses all processors of a multi-processor compilation host.
+	\item Makes best use of compilation hosts with widely differing CPU speeds.
+	\item Guarantees that a compilation host will not be overloaded by
+	compilations. 
+	\item Takes into account the load on a host caused by non-compilation tasks.
+	\item Supports the dynamic addition and removal of hosts to the compilation farm.
+	\item Works with distcc, which need not be altered in any way.
+\end{itemize} %% dmucs.sourceforge.net
+
+\subsection{Ramdrive}
+Using a Ramdrive and compile files from this ramdrive would significantly boost
+up the compilation process, by reducing the overall memory access time.
+
+\section{How does it work?}
+A short explanation about distcc and associated tools are to be found in the
+following section.
+
+\subsection{A client/server approach}
+
+distcc consists of a client program and a server. The client analysis the
+command run, and for jobs that can be distributed it chooses a host, runs the
+pre-processor, sends the request across the network and reports the results. The
+server accepts and handles requests containing command lines and source code
+and responds with object code or error messages~\cite{lca2004}. 
+%%http://distcc.samba.org/doc/lca2004/distcc-lca-2004.html
+
+\subsection{Scheduler}
+%% http://distcc.samba.org/doc/lca2004/distcc-lca-2004.html
+distcc uses a basic load-balancing algorithm to choose a volunteer to run each
+particular job. Scheduling is managed by small state files kept in each user's
+home directory. In addition, each server imposes a limit on the number of jobs
+which will be accepted at any time. This prevents any single server being
+overloaded, and provides basic coordination over servers being used by several
+clients. By default, the limit on the number of jobs is set to two greater than
+the number of processors in the server, to allow for up to two jobs being in
+transit across the network at any time~\cite{lca2004}.
+
+Clients keep a temporary note of machines which are unreachable or failing.
+These notes time out after sixty seconds, so machines which reboot or are
+temporarily unreachable will shortly rejoin the cluster. Machines which are
+abruptly terminated or shut down while running jobs may cause those particular
+compilations to fail, which can normally be addressed by re-running Make. If
+distccd is gracefully terminated it will complete any running jobs and decline
+future submissions~\cite{lca2004}.
+
+\subsection{Security}
+distcc is intended to be quite secure when used according to the documentation,
+but it must be properly configured. If not using SSH, you must use the
+--allow rule to limit access to port 3632~\cite{distcc-gg}.
+
+\section{Tooling}
+As all these tools are coming from Unix Linux world, we are using the win32
+compatible source coming with a cygwin installation~\cite{cygwin}. 
+The distcc, ccache, dmucs project sources are available from the Internet, these sources can be compiled under cygwin and be run under a Win32 OS.
+
+Building platform c projects requires the WindRiver GNU compiler. These
+compiler executable and libraries have to be located on each distcc server host.
+
+Other Unix utilities could be used for scripting issues, all these are available
+under the cygwin precompiled executables.
+
+\subsection{Make}
+The GNU Make tool powers up the platform c projects compilation. Rhapsody 
+generate makefiles for each subsystem of the project, ascendant makefiles are generated
+by perl script.
+
+GNU make knows how to execute several commands at once. Normally, make will execute
+only one command at a time, waiting for it to finish before executing the next. However,
+the '-j' or '--jobs' option tells make to execute many commands simultaneously.
+
+The parallel execution feature of the make tools combined with distcc permits
+to distribute the code compilation over volunteer PC.
+
+The make executable comes with the WindRiver installation, and is only needed on
+the client developer computer.
+
+\subsection{Distcc}
+%% distcc + cygwin
+Distcc sources are available under http://code.google.com/p/distcc/,
+compiling \footnote{tar xvzf distcc-3.x.tar.gz; cd distcc-3.x;
+./configure; make} the sources under cygwin result in
+several win32 executables:
+
+\begin{itemize}
+  \item distcc.exe: the client program, distcc distributes compilation jobs across volunteer machines running
+distccd. Jobs that cannot be distributed, such as linking or pre-processing are run locally.  distcc should be used with make's -jN
+option to execute in parallel on several machines.  
+  \item distccd.exe: the server program, distccd runs either from inetd or as a
+  standalone daemon to compile files submitted by the distcc client. distccd
+  should only run on trusted networks.
+  \item distccmon-text.exe: the monitor program, displays current compilation jobs in text form.
+\end{itemize}
+
+\subsection{Windriver compiler}
+
+The WindRiver GNU ccppc.exe c++ppc.exe are the compilers for ppc32 architecture
+we use when building a project based on the platform c.
+As the compiler is under the GNU licensing agreements (Copyright (C) 2004 Free Software Foundation, Inc.), we are free to use it on
+any volunteer PC.
+
+\subsection{Compiler wrapper}
+% windows vs. cygwin problem 
+As the compilation process is executed under a WindRiver development shell the
+path definitions are not compatible to the cygwin one.
+
+For example:
+\begin{verbatim}
+dev shell: C:/Programme/windriver_pid_3_4
+cygwin: /cygdrive/c/Programme/windriver_pid_3_4
+\end{verbatim}
+
+Unfortunately when compiling the distcc program under cygwin, the path
+definition should fit to the cygwin pattern.
+For matching this requirement, compilers wrapper\footnote{wccppc.exe and
+wc++ppc.exe} were created.
+These wrapper function is simple, it takes all the argument passed to the
+original compiler call and build a new compiler call including /cygdrive/ so the
+distcc program is able to work properly!
+
+So C: becomes /cygdrive/c
+
+\section{PC-Support implication}
+%% synchronised clocks
+Our IT implication is needed for the deployment and the automatic start-up of
+the distcc server program on each volunteer PC.
+
+A deployment/install script should be executed once on each volunteer PC, and
+the distcc server should be started as a service on each boot of a volunteer PC.
+
+\subsection{Distcc deployment}
+The deployment of distcc consist in creating directories and setting environment
+variables on the volunteer PC. Unpacking an archive containing the distcc
+distribution as well as the compilers program and libraries finishes the
+installation.
+
+follows the directories:
+\begin{itemize}
+	\item C:/programme/distcc
+	\item C:/distcc/tmp/distcc/lock
+	\item C:/distcc/tmp/distcc/state
+	\item C:/distcc/tmp/ccache
+\end{itemize}
+
+follows the environment variable to set:
+\begin{itemize}
+	\item DISTCC\_DIR=C:/programme/distcc
+	\item CCACHE\_DIR=C:/programme/distcc
+	\item TMPDIR=C:/distcc/tmp
+\end{itemize}
+
+N.B.: the directories for distcc and ccache are not fixed, but the environment
+variable are set by the distcc program.
+
+\subsubsection{Memory requirements}
+
+the deployment package is approximately 30 MB. On the volunteer PC side the
+installation requires approximately 80 MB (WindRiver compilers).
+
+For an optimum compilation time, the WindRiver compilers files should not be
+located on a network drive, though locally on each volunteer PC.
+
+\subsubsection{Other setups}
+The volunteer PCs have to be synchronised on a common clock, through a NTP server
+or equivalent.
+
+The antivirus policy should be updated for the volunteer PC, so that the
+distcc directories are not constantly scanned at each compilation call.
+
+\subsection{Services / start-up script}
+The volunteer PC should automatically start respectively stops the distcc server
+at start-up respectively shutdown time.
+
+This distcc start script has two functionalities:
+\begin{itemize}
+  \item at start-up: register the volunteer host in a static host file, located
+  on a network drive \& start the distcc server service
+  \item at shutdown: unregister the host in the static host file \& stop the distcc server service.
+\end{itemize}
+
+\subsection{Maintainance}
+%% deploy new version of distcc
+For maintenance purpose, updating to a new version of distcc, the same schema as
+the deployment of distcc should be used. Meaning the new version of the distcc
+executable are overwritten on each volunteer PC, new environment variable could
+be set, \ldots
+
+%% bibtex
+\bibliography{biblio}{}
+\bibliographystyle{plain}
+
+\end{document}
+

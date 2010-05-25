@@ -1,0 +1,13 @@
+#TeXlipse project settings
+#Mon Oct 12 16:35:40 CEST 2009
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=ekeller-ibm-innovation.tex
+outputFile=ekeller-ibm-innovation.pdf
+langSpell=en
+markDer=true
+srcDir=

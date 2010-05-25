@@ -1,0 +1,30 @@
+#Unit Tester Options File
+#Do not alter this file
+#tool.name=cantpp
+#tool.use=true
+--sm:--call_seq_code
+"--analyse"
+"--parse:--line_directives"
+"--parse:-W2"
+"--ci:--instr:stmt;func;call;"
+"--sm:--friend:CMutexSemaphore#TEST_CLASS(CMutexSemaphore)"
+
+"--sm:--wrap:semClose#*"
+"--sm:--wrap:semOpen#*"
+"--sm:--wrap:semTake#*"
+"--sm:--wrap:semGive#*"
+
+#User Section
+#"--ci:--no_exceptions"
+#"--ci:--no_instr:all#CBase::*"
+#"--dont_ci:*"
+#"--do_ci:CMutexSemaphore.cpp"
+"--do_ci:CMutexSemaphore.h"
+
+"--ci:--no_instr:all#*"
+"--ci:--instr:all#CMutexSemaphore::*"
+
+
+### generation of external wraper
+#--sm:--gen_wrapper_file
+#--sm:--no_call_seq_code

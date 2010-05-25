@@ -1,0 +1,98 @@
+% Fichier extension internship.sty
+% Guillaume Goussard - Gnaphron
+% Version 1.0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{internship}%
+[2005/11/17 v1.a Extension internship pour les rapport de stage]
+
+%\usepackage[dvips,final]{graphics}
+\usepackage{fancyhdr}
+
+% Definition d'un nouveau style de titre
+\makeatletter
+% Une commande semblable a \rlap ou \llap, mais centrant son argument
+\def\clap#1{\hbox to 0pt{\hss #1\hss}}%
+% Une commande centrant son contenu (à utiliser en mode vertical)
+\def\ligne#1{%
+  \hbox to \hsize{%
+    \vbox{\centering #1}}}%
+% Une comande qui met son premier argument à gauche, le second au 
+% milieu et le dernier à droite, la première ligne ce chacune de ces
+% trois boites coïncidant
+\def\haut#1#2#3{%
+  \hbox to \hsize{%
+    \rlap{\vtop{\vspace{3mm}\raggedright #1}}%
+    \hss
+    \rlap{\vtop{\vspace{1mm} \centering \includegraphics[width=2cm]{\@school}}}%
+    \hss
+    \clap{\vtop{\raggedleft #3 }}}
+    \vspace{2cm}
+    \hrule
+    \center
+    \LARGE{\@title}\\
+    \Large{\@subtitle}
+    \normalsize
+    \endcenter
+    \hrule
+    }%
+% Idem, mais cette fois-ci, c'est la dernière ligne
+\def\bas#1#2#3{%
+  \hbox to \hsize{%
+    \rlap{\vbox{\raggedright #1}}%
+    \hss
+    \clap{\vbox{\centering #2}}%
+    \hss
+    \llap{\vbox{\raggedleft #3}}}}%
+% La commande \maketitle
+\def\maketitle{%
+  \thispagestyle{empty}\vbox to \vsize{%
+    \haut{\@author\\sp\'e : \@uid}{\@blurb}{}
+    \vfill
+    \ligne{\huge \@subject}
+    \vspace{5mm}
+    \ligne{by\\ \Large \@author\\ 
+    \normalsize \texttt{<\@email>}
+    }
+    \vspace{5mm}
+    \ligne{Supervised by : \@tutor}
+    \vspace{5mm}
+    \ligne {\large \@compagny }
+    \vspace{1cm}
+    \includegraphics[width=7.5cm,angle=0]{\@logo}
+    \vfill
+    \vfill
+    \bas{}{\@location, \@date}{}
+    }%
+  \cleardoublepage
+  }
+% les header et footer bien comme j'aime
+\pagestyle{fancy}
+
+% Les commandes permettant de définir la date, le lieu, etc.
+\def\date#1{\def\@date{#1}}
+\def\author#1{\def\@author{#1}}
+\def\title#1{\def\@title{#1}}
+\def\subtitle#1{\def\@subtitle{#1}}
+\def\subject#1{\def\@subject{#1}}
+\def\location#1{\def\@location{#1}}
+\def\blurb#1{\def\@blurb{#1}}
+\def\email#1{\def\@email{#1}}
+\def\uid#1{\def\@uid{#1}}
+\def\subject#1{\def\@subject{#1}}
+\def\tutor#1{\def\@tutor{#1}}
+\def\school#1{\def\@school{#1}}
+\def\logo#1{\def\@logo{#1}}
+\def\compagny#1{\def\@compagny{#1}}
+% Valeurs par défaut
+\date{\today}
+\author{}
+\title{}
+\subtitle{}
+\location{}
+\blurb{}
+\email{}
+\compagny{}
+\makeatother
+

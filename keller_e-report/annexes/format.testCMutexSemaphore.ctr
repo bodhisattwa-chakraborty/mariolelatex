@@ -1,0 +1,102 @@
+Log Level defaulted to detailed.
+===========================================================================
+= Wind River Workbench Unit Tester v2.5                                   =
+=-------------------------------------------------------------------------=
+= Test Description: CMutexSemaphore                                       =
+=     Test Started: Time not available                                    =
+===========================================================================
+
+ Hamilton Medical AG
+-------------------------------------------------------------------------------
+
+ File:
+ -----
+   $Workfile:   ut_header.c  $
+   $Revision:   10.0  $
+   $Archive:   C:/Nemo  $
+   $Author:   keller_e  $
+   $Modtime:   Jul 05 2006 11:10:08  $
+
+-------------------------------------------------------------------------------
+
+
+
+
+
+ Testing Notes:
+ --------------
+	This Report was obtained with:
+		Files Label: 		B_2007_12_05
+		CMutexSemaphore.cpp				rev: 1.0
+		test_CMutexSemaphore.cpp			rev: 1.2
+
+===============================================================================
+
+ Test Summary
+ ------------
+Summary by     EXECUTED     Overall                Statistics
+Coverage type  INFEASIBLES  (wavg)     avg /    min /    max /    dev /   num
+-----------------------------------------------------------------------------
+entry point            0     0.0%     0.0% /   0.0% /   0.0% /   0.0% /    18
+call-return            0     0.0%    33.3% /   0.0% / 100.0% /  48.5% /    18
+statement              0     0.0%    11.1% /   0.0% / 100.0% /  32.3% /    18
+decision               0     0.0%    55.5% /   0.0% / 100.0% /  51.1% /    18
+-----------------------------------------------------------------------------
+
+=-------------------------------------------------------------------------=
+= Test                 Script  Checks  Checks  Checks  Call Seq     TEST  =
+= Case                 Errors  Failed  Passed  Warned  Failures    RESULT =
+=-------------------------------------------------------------------------=
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= test_CMutexSemapho        0       0       1       0         0      PASS =
+= Other                     0       4       0       0         0   >> FAIL =
+=-------------------------------------------------------------------------=
+= TOTALS                    0       4       9       0         0   >> FAIL =
+===========================================================================
+------------------------- Start Test: test_CMutexSemaphore_flush
+
+<Insert test case description here>
+
+    Start Call Sequence Validation:
+    Expected calls: {semFlush#default}
+
+                Start Exception Block:
+
+                PASSED: No Exceptions
+
+                End Exception Block
+
+    End Call Sequence Validation:
+
+    Call sequence matched:
+
+
+------------------------- End Test: test_CMutexSemaphore_flush
+
+------------------------- Start Test: test_CMutexSemaphore_createMutex
+
+<Insert test case description here>
+
+    Start Call Sequence Validation:
+    Expected calls: {semOpen#default}
+
+                Start Exception Block:
+
+                PASSED: No Exceptions
+
+                End Exception Block
+
+    End Call Sequence Validation:
+
+    Call sequence matched:
+
+
+------------------------- End Test: test_CMutexSemaphore_createMutex
+[...]

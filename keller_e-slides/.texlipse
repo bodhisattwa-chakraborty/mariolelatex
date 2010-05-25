@@ -1,0 +1,13 @@
+#TeXlipse project settings
+#Mon Jul 02 22:52:57 CEST 2007
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=keller_e-slides.tex
+outputFile=keller_e-slides.pdf
+langSpell=en
+markDer=true
+srcDir=
