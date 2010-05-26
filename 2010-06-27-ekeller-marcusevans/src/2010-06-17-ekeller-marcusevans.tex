@@ -34,7 +34,7 @@
 \usepackage[T1]{fontenc}
 
 
-\title[CI]{Continuous Integration}
+\title[Continuous Integration]{Continuous Integration}
 
 %\subtitle{at HAMILTON-Medical AG}
 
@@ -88,6 +88,27 @@ Platform C
 \titlepage
 \end{frame}
 
+% goal and policy
+%\section*{Presentation goals and policy}
+\begin{frame}
+\frametitle{Goals and policy}
+Goals:
+\begin{itemize}
+  \item Give an overview of what can be achieved with Continuous Integration
+  (CI)
+  \item Share knowledge and ideas
+\end{itemize}
+
+\begin{block}{Presentation policy}
+   \alert{Please note your question and keep them warm for the end of the
+   presentaion}
+ \end{block}
+
+% You might wish to add the option [pausesections]
+\end{frame}
+
+
+
 \begin{frame}
 \frametitle{Outline}
 \tableofcontents
@@ -102,65 +123,96 @@ Platform C
 
 \section{Introduction}
 
-\subsection[Hamilton Medical]{About Hamilton Medical}
-
+\subsection[About Hamilton-Medical]{About Hamilton-Medical}
 \begin{frame}
-\frametitle{Activities}
-\begin{itemize}
-  \item ICU medical ventilators
-  \item flow sensor
-  \item medical sensors
-\end{itemize}
+\frametitle{Activities and organisation}
+\begin{columns} 
+  \column{.5\textwidth}
+    \begin{block}{Platform C}
+      \begin{center}
+	\includegraphics[height=2cm]{../img/C1.png}
+	\includegraphics[height=2cm]{../img/C2.png}
+      \end{center}
+    \end{block}
+
+    \begin{block}{Platform G}
+      \begin{center}
+	\includegraphics[height=2cm]{../img/G5.png}
+      \end{center}
+    \end{block}
+
+  \column{.5\textwidth}
+    \begin{block}{Accessories}
+      \begin{center}
+	\includegraphics[height=2cm]{../img/flowsensor.png}
+      \end{center}
+    \end{block}
+\end{columns}
 
 \end{frame}
 
-\begin{frame}
-\frametitle{Organisation}
+\subsection[Developer environment]{Developer environment}
+\begin{frame}{Host development tools}
+The Platform C Projects are developed on Microsoft Windows Host, using the
+following software and hardware:
+\begin{columns}
+	\column{.5\textwidth}
+	\begin{block}{Software Development}
+	\begin{itemize}
+		\item<1-> IBM Rational Rhapsody
+  		\item<2-> WindRiver Workbench (eclipse) 
+  		\item<3-> IPL Cantata++
+    \end{itemize}
+    \end{block}
 
-\begin{itemize}
-  \item Platform G
-  \item Platform C
-\end{itemize}
+	\begin{block}{Other used tools}
+	\begin{itemize}
+      \item<4-> shell, perl, scripting
+      \item<5-> PVCS version manager
+      \item<6-> ScrumWorks 
+    \end{itemize}
+    \end{block}
 
+	\column{.5\textwidth}
+	\begin{block}{Target Development}
+	\begin{itemize}
+      \item<7->WindRiver VxWorks 6.4
+  	  \item<8-> Power PC MPC5200 B
+    \end{itemize}
+    \end{block}
+\end{columns}
 \end{frame}
 
-\subsection[developer environment]{Software developer environment}
-
+%\section[Key notes]{Key notes}
 \begin{frame}
-\frametitle{Hosts configuration}
-% PC
-Host Computer configuration
+\frametitle{Continuous integration key notes}
 \begin{itemize}
-  \item Windows XP
-  \item Dual/Quad core
+  \item CI is a software development practice where software parts are
+  integrated frequently
+  \item Each integration step is verified by an automated process
+  \item Find problems as soon as possible
+  \item Make it easy for anyone to get the latest executable
+  \item CI is all about communication
 \end{itemize}
-
-Development tools
-\begin{itemize}
-  \item WindRiver VxWorks C++
-  \item IBM Rational Rhapsody Developer version
-  \item IPL Cantata++
-\end{itemize}
-
-Continuous integration server configuration
-\begin{itemize}
-  \item Ubuntu Linux VM on EsX server
-  \item 8 vCPU = 16 threads
-\end{itemize}
-
 \end{frame}
 
-\begin{frame}
-\frametitle{Target}
+\section[Automated build and test]{Automated build and test}
+\subsection[Technical notes]{Technical notes}
 
-\begin{itemize}
-  \item WindRiver VxWorks
-  \item PPC32 (type MPC2500)
-\end{itemize}
+\subsection[Good practices]{Good practices}
 
-\end{frame}
+\subsection[Prerequisites]{Prerequisites}
 
+\section[Automated deployment]{Automated deployment}
 
+\subsection[Notifications and list of changes]{Notifications and list of
+changes}
+
+\subsection[Get the latest versions]{Get the latest versions}
+
+\subsection[feedbacks]{Feedbacks}
+
+\section[Benefits and optimisation]{Benefits and optimisation}
 
 
 \section*{Summary}
