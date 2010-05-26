@@ -34,7 +34,7 @@
 \usepackage[T1]{fontenc}
 
 
-\title{Continuous Integration}
+\title[CI]{Continuous Integration}
 
 %\subtitle{at HAMILTON-Medical AG}
 
@@ -47,8 +47,7 @@
 % - Keep it simple, no one is interested in your street address.
 \institute[HAMILTON-Medical AG]
 {
-Software Engineer\\
-New Products Department\\
+HAMILTON-Medical AG\\
 Platform C
 }
 
@@ -95,44 +94,74 @@ Platform C
 % You might wish to add the option [pausesections]
 \end{frame}
 
+%% frame pattern
+%\begin{frame}
+%\frametitle{}
+%\framesubtitle{Subtitles are optional}
+%\end{frame}
 
 \section{Introduction}
 
-\subsection[Short First Subsection Name]{First Subsection Name}
+\subsection[Hamilton Medical]{About Hamilton Medical}
 
 \begin{frame}
-\frametitle{}
-\framesubtitle{Subtitles are optional}
-
+\frametitle{Activities}
 \begin{itemize}
-  \item
-  \item
+  \item ICU medical ventilators
+  \item flow sensor
+  \item medical sensors
 \end{itemize}
+
 \end{frame}
 
 \begin{frame}
-\frametitle{}
+\frametitle{Organisation}
 
-% You can create overlays
 \begin{itemize}
-  \item using the \texttt{pause} command:
-  \begin{itemize}
-    \item First item.
-    \pause
-    \item Second item.
-  \end{itemize}
-  \item using overlay specifications:
-  \begin{itemize}
-    \item<3-> First item.
-    \item<4-> Second item.
-  \end{itemize}
-  \item using the general \texttt{uncover} command:
-  \begin{itemize}
-    \uncover<5->{\item First item.}
-    \uncover<6->{\item Second item.}
-  \end{itemize}
+  \item Platform G
+  \item Platform C
 \end{itemize}
+
 \end{frame}
+
+\subsection[developer environment]{Software developer environment}
+
+\begin{frame}
+\frametitle{Hosts configuration}
+% PC
+Host Computer configuration
+\begin{itemize}
+  \item Windows XP
+  \item Dual/Quad core
+\end{itemize}
+
+Development tools
+\begin{itemize}
+  \item WindRiver VxWorks C++
+  \item IBM Rational Rhapsody Developer version
+  \item IPL Cantata++
+\end{itemize}
+
+Continuous integration server configuration
+\begin{itemize}
+  \item Ubuntu Linux VM on EsX server
+  \item 8 vCPU = 16 threads
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Target}
+
+\begin{itemize}
+  \item WindRiver VxWorks
+  \item PPC32 (type MPC2500)
+\end{itemize}
+
+\end{frame}
+
+
+
 
 \section*{Summary}
 
