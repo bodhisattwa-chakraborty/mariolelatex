@@ -11,14 +11,29 @@
 % Authors: ekeller
 %
 
-%\documentclass[handout]{beamer}
-\documentclass{beamer}
+
+
+\documentclass[handout]{beamer}
+%\documentclass{beamer}
+
 
 \mode<presentation>
 {
 \usetheme{Warsaw}
-
 \setbeamercovered{transparent}
+% added the frame numbers 2010-05-28 by ekeller
+\setbeamertemplate{footline}
+{%
+\begin{beamercolorbox}[wd=0.5\textwidth,ht=3ex,dp=1.5ex,leftskip=.5cm,rightskip=.5cm]{author in head/foot}%
+\usebeamerfont{author in head/foot}%
+\insertframenumber/\inserttotalframenumber\hfill\insertshortauthor%
+\end{beamercolorbox}%
+\vspace*{-4.5ex}\hspace*{0.5\textwidth}%
+\begin{beamercolorbox}[wd=0.5\textwidth,ht=3ex,dp=1.5ex,left,leftskip=.5cm]{title in head/foot}%
+\usebeamerfont{title in head/foot}%
+\insertshorttitle%
+\end{beamercolorbox}%
+} 
 }
 
 \usepackage[english]{babel}
@@ -36,7 +51,8 @@
 \usepackage[T1]{fontenc}
 
 
-\title[Continuous Integration]{Continuous Integration}
+\title[Industrialisierung Embedded Software Engineering: CI]{Continuous
+Integration}
 
 %\subtitle{at HAMILTON-Medical AG}
 
@@ -50,7 +66,6 @@
 \institute[HAMILTON-Medical AG]
 {
 HAMILTON-Medical AG\\
-Platform C
 }
 
 \date{2010-06-17 / Industrialisierung Embedded Software Engineering}
@@ -93,7 +108,7 @@ Platform C
 % goal and policy
 %\section*{Presentation goals and policy}
 \begin{frame}
-\frametitle{Goals and policy}
+\frametitle{Goals}
 Goals:
 \begin{itemize}
   \item<1-> Give an overview of what can be achieved with Continuous Integration
@@ -101,23 +116,11 @@ Goals:
   \item<2-> Share knowledge and ideas
 \end{itemize}
 \onslide<3->{
-\begin{block}{Presentation policy}
+\begin{block}{Presentation rules}
    \alert{Please note your question and keep them warm for the end of the
-   presentaion}
+   presentation}
  \end{block}
 }
-\end{frame}
-
-\begin{frame}
-\frametitle{Continuous integration key notes}
-\begin{itemize}
-  \item<1-> CI is a software development practice where software parts are
-  integrated frequently
-  \item<2-> Each integration step is verified by an automated process
-  \item<3-> Find problems as soon as possible
-  \item<4-> Make it easy for anyone to get the latest executable
-  \item<5-> CI is all about communication
-\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -198,6 +201,18 @@ following software and hardware:
 \end{columns}
 \end{frame}
 
+\begin{frame}
+\frametitle{Continuous Integration key notes}
+\begin{itemize}
+  \item<1-> CI is a software development practice where software parts are
+  integrated frequently
+  \item<2-> Each integration step is verified by an automated process
+  \item<3-> Find problems as soon as possible
+  \item<4-> Make it easy for anyone to get the latest executable
+  \item<5-> CI is all about communication
+\end{itemize}
+\end{frame}
+
 \section[Automated build and test]{Automated build and test}
 \subsection[Technical notes]{Technical notes}
 
@@ -213,7 +228,7 @@ following software and hardware:
 \frametitle{Good practices}
 \begin{itemize}
   \item<1-> Everyone in the team integrates frequently (daily)\cite{Fowler06}
-  \item<2-> Self-testing code [2] when writing code, also write test for
+  \item<2-> Self-testing code when writing code, also write test for
   that code\cite{Duvall07}
   \item<3-> Imperfect test running frequently are better than perfect test that
   are never written at all\cite{Duvall07}
@@ -231,11 +246,11 @@ following software and hardware:
 
 \begin{itemize}
   \item<1-> A decent Source Code Management system (SCM)\cite{Berczuk03}
-  \item<2-> Everything you need to fulfil a software build should be checked in
+  \item<2-> Everything you need to fullfil a software build should be checked in
   the repository\cite{Berczuk03} (scripts, 3rd party libraries,\ldots)
   \item<3-> Automated build sequence
   \item<4-> Automated test builds and run
-  \item<5-> Automated generate documentation
+  \item<5-> Automated documentation generation
   \item<6-> Automated deployment (software package)  
 \end{itemize}
 
@@ -266,7 +281,7 @@ changes}
 {
 \begin{block}{QA, PM, Documentation}
    \begin{itemize}
-     \item<4-> Get notified when an release build succeeds
+     \item<4-> Get notified when a release build succeeds
      \item<5-> Get the detailed change log between two builds, list new
      features, fixes, between each commit.
    \end{itemize}
@@ -304,9 +319,9 @@ changes}
 \end{frame}
 
 
-\section*{Summary}
+\section*{Overview of Hamilton process}
 \begin{frame}
-\frametitle<presentation>{Summary}
+\frametitle<presentation>{Overview of Hamilton process}
 
 \setbeamercovered{invisible}
 \centering
@@ -321,11 +336,14 @@ changes}
 \begin{itemize}
 	\item<1-> Reducing risk, increase software quality 
     \item<2-> short integration time 
-    \item<3-> Bugs are detected quickly, easier to fix (diff debug)
-    \item<4-> Detecting bugs earlier, depending on how good the test suite is
+    \item<3-> Bugs are detected quickly, depending on how good the test suite
+    is\cite{Duvall07}
+    \item<4-> Easier to fix bugs (diff debug)
     \item<5-> More frequent demonstration of new features, more collaboration
     between developers, PM, QA, \ldots
-    \item<6> More frequent releases
+    \item<6-> More frequent releases
+    \item<7-> Frequent customer feedback, improve customer requirement
+    fullfility
 \end{itemize}
 \end{frame}
 
@@ -350,7 +368,7 @@ changes}
       \item distribute your compilation over a computer farm\cite{Pool09}
       \item eventually perform incremental builds instead of clean build
     \end{itemize}
-    \item<6-> Prevent cecking in brocken code, by performing a private
+    \item<6-> Prevent checking in broken code, by performing a private
     build\cite{Duvall07}
     \item<7-> Partially automate integration/system tests (smoke
     test)\cite{Berczuk03}
