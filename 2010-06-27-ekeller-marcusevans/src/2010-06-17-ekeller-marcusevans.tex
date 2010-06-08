@@ -13,8 +13,8 @@
 
 
 
-\documentclass[handout]{beamer}
-%\documentclass{beamer}
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
 
 
 \mode<presentation>
@@ -101,10 +101,15 @@ HAMILTON-Medical AG\\
 
 \begin{document}
 
-\begin{frame}
+% this braket defines that the background template should only be used for this
+% frame
+{
+% set the hamilton.jpg as background image
+\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{../img/hamilton.jpg}}
+\begin{frame}[shadow=false]
 \titlepage
 \end{frame}
-
+}
 % goal and policy
 %\section*{Presentation goals and policy}
 \begin{frame}
@@ -116,7 +121,7 @@ Goals:
   \item<2-> Share knowledge and ideas
 \end{itemize}
 \onslide<3->{
-\begin{block}{Presentation rules}
+\begin{block}{Presentation rule}
    \alert{Please note your question and keep them warm for the end of the
    presentation}
  \end{block}
